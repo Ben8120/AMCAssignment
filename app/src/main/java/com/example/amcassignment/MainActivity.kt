@@ -13,15 +13,23 @@ import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.amcassignment.screen.HomeScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AMCAssignmentTheme {
-                HomeScreen()
+                navController = rememberNavController()
+                SetupNavGraph(navController = navController)
+
+                //HomeScreen()
                 //DefaultPreview()
             }
         }
@@ -36,13 +44,10 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    AMCAssignmentTheme {
-        Column(modifier = Modifier.fillMaxHeight()) {
-            TopBar()
-            testCard()
-            Greeting("MY")
-        }
-
+    Column(modifier = Modifier.fillMaxHeight()) {
+        TopBar()
+        testCard()
+        Greeting("MY")
     }
 }
 
