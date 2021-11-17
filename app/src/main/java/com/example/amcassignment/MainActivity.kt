@@ -1,15 +1,19 @@
 package com.example.amcassignment
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.amcassignment.screen.HomeScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,13 +21,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AMCAssignmentTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                HomeScreen()
+                //DefaultPreview()
             }
         }
     }
@@ -38,6 +37,36 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     AMCAssignmentTheme {
-        Greeting("Android")
+        Column(modifier = Modifier.fillMaxHeight()) {
+            TopBar()
+            testCard()
+            Greeting("MY")
+        }
+
+    }
+}
+
+@Composable
+fun TopBar(){
+    TopAppBar(
+        title = {Text(text = "App Toolbar")},
+        navigationIcon = {Icon(
+            painter = painterResource(id = R.drawable.ic_menu),
+            contentDescription = null)
+                         },
+    )
+}
+
+@Composable
+fun testCard(){
+    val paddingModifier = Modifier.padding(10.dp)
+    Card(elevation = 10.dp,
+        modifier = paddingModifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .clickable { }
+    ) {
+        Text(text = "Card with elevation sample",
+        modifier = paddingModifier)
     }
 }
