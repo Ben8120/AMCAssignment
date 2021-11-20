@@ -1,5 +1,6 @@
 package com.example.amcassignment.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -56,8 +58,14 @@ fun confirmationScreen(navController: NavController) {
         ) {
             pagerButtons(pageNo = 4, navController = navController)
         }
+        val context = LocalContext.current
         Button(onClick = {
-            navController.navigate("home")
+            navController.navigate("home")  { popUpTo("home") { inclusive = true} }
+            Toast.makeText(
+                context,
+                "Your booking has been confirmed",
+                Toast.LENGTH_SHORT
+            ).show()
         },
             modifier = Modifier
                 .width(screenWidth / 2)

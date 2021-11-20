@@ -31,7 +31,7 @@ fun reservationScreen(navController: NavController  ) {
                 .verticalScroll(scrollState)
         ) {
             Text(text = "reservation screen")
-            repeat(30){
+            repeat(15){
                 serviceCard()
             }
         }
@@ -43,29 +43,6 @@ fun reservationScreen(navController: NavController  ) {
             .padding(start = 10.dp, bottom = 10.dp)
             .horizontalScroll(scrollPageState)
         ) {
-            /*
-            Button(onClick = { /*TODO*/ }, modifier = Modifier
-                .width(45.dp)
-                .padding(end = 10.dp), enabled = true) {
-                Text(text = "<")
-            }
-            Button(onClick = { /*TODO*/ }, modifier = Modifier
-                .width(45.dp)
-                .padding(end = 10.dp), enabled = pageNo >= 1) {
-                Text(text = "1")
-            }
-            Button(onClick = { /*TODO*/ }, modifier = Modifier
-                .width(45.dp)
-                .padding(end = 10.dp), enabled = pageNo >= 2
-            ) {
-                Text(text = "2")
-            }
-            Button(onClick = { /*TODO*/ }, modifier = Modifier
-                .width(45.dp)
-                .padding(end = 10.dp), enabled = pageNo >= 3
-            ) {
-                Text(text = "3")
-            }*/
             pagerButtons(pageNo = 0, navController = navController)
         }
         //pager
