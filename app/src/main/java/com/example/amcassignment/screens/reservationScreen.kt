@@ -1,6 +1,8 @@
 package com.example.amcassignment.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
@@ -15,9 +17,12 @@ import androidx.navigation.NavController
 
 @Composable
 fun reservationScreen(navController: NavController  ) {
+    val scrollState = rememberScrollState()
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier.padding(bottom = 75.dp)
+            modifier = Modifier
+                .padding(bottom = 75.dp)
+                .verticalScroll(scrollState)
         ) {
             Text(text = "reservation screen")
             repeat(30){
@@ -26,7 +31,10 @@ fun reservationScreen(navController: NavController  ) {
         }
         Button(onClick = {
             navController.navigate("datetime")
-        }, modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter).padding(16.dp)) {
+        }, modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.BottomCenter)
+            .padding(16.dp)) {
             Text(text = "Next")
         }
     }
@@ -47,7 +55,7 @@ fun serviceCard() {
                 onCheckedChange = {checkedState.value = it},
                 modifier = Modifier.padding(16.dp)
             )
-            Text(text = "service", modifier = Modifier.padding(16.dp))
+            Text(text = "[cleaning service]", modifier = Modifier.padding(16.dp))
         }
     }
 }
