@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import java.time.LocalDate
@@ -21,10 +22,17 @@ import java.util.*
 
 @Composable
 fun datetimeScreen(navController: NavController) {
-    Button(onClick = {
-        navController.navigate( "maps")
-    }) {
-        Text(text = "Next")
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ){
+        datetimeComposable(context = LocalContext.current)
+        Button(onClick = {
+            navController.navigate( "maps")
+        },
+            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp)
+        ) {
+            Text(text = "Next")
+        }
     }
 }
 
@@ -86,14 +94,10 @@ fun datetimeComposable(context: Context) {
             }
             Text(text = "Selected Time: ${time.value}", modifier = Modifier.padding(10.dp))
         }
-        Button(onClick = {
-
-        }) {
-            Text(text = "Next")
-        }
     }
 }
 
+//can delete, no use anymore
 @Composable
 fun timeComposable(context: Context) {
     val calendar = Calendar.getInstance()
