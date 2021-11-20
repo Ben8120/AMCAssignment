@@ -1,7 +1,9 @@
 package com.example.amcassignment.screens
 
 import android.os.Bundle
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -29,6 +31,7 @@ fun mapScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
+    val scrollPageState = rememberScrollState()
     Box(modifier = Modifier.fillMaxSize()) {
         Column() {
             Box(
@@ -41,7 +44,9 @@ fun mapScreen(navController: NavController) {
                 myMap(){}
             }
             Card(
-                modifier = Modifier.fillMaxWidth().padding(10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
                 elevation = 10.dp
             ) {
                 var text by remember { mutableStateOf(TextFieldValue("")) }
@@ -57,11 +62,19 @@ fun mapScreen(navController: NavController) {
                 )
             }
         }
-        
+
+        Row(modifier = Modifier
+            .width(screenWidth / 2)
+            .align(Alignment.BottomStart)
+            .padding(start = 10.dp, bottom = 10.dp)
+            .horizontalScroll(scrollPageState)
+        ) {
+            pagerButtons(pageNo = 3, navController = navController)
+        }
         Button(onClick = {
                          navController.navigate("confirmation")
         }, modifier = Modifier
-            .width(screenWidth/2)
+            .width(screenWidth / 2)
             .align(Alignment.BottomEnd)
             .padding(10.dp)) {
             Text(text = "Next")

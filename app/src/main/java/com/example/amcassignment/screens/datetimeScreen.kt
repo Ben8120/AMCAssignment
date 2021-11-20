@@ -4,7 +4,9 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.widget.DatePicker
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,14 +28,26 @@ fun datetimeScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
+    val scrollPageState = rememberScrollState()
     Box(
         modifier = Modifier.fillMaxSize()
     ){
         datetimeComposable(context = LocalContext.current)
+        Row(modifier = Modifier
+            .width(screenWidth / 2)
+            .align(Alignment.BottomStart)
+            .padding(start = 10.dp, bottom = 10.dp)
+            .horizontalScroll(scrollPageState)
+        )  {
+            pagerButtons(pageNo = 2, navController = navController)
+        }
         Button(onClick = {
             navController.navigate( "maps")
         },
-            modifier = Modifier.width(screenWidth/2).align(Alignment.BottomEnd).padding(10.dp)
+            modifier = Modifier
+                .width(screenWidth / 2)
+                .align(Alignment.BottomEnd)
+                .padding(10.dp)
         ) {
             Text(text = "Next")
         }

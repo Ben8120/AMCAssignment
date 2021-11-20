@@ -1,7 +1,9 @@
 package com.example.amcassignment.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -21,6 +23,7 @@ fun confirmationScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
+    val scrollPageState = rememberScrollState()
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -44,10 +47,22 @@ fun confirmationScreen(navController: NavController) {
 
             }
         }
+
+        Row(modifier = Modifier
+            .width(screenWidth / 2)
+            .align(Alignment.BottomStart)
+            .padding(start = 10.dp, bottom = 10.dp)
+            .horizontalScroll(scrollPageState)
+        ) {
+            pagerButtons(pageNo = 4, navController = navController)
+        }
         Button(onClick = {
             navController.navigate("home")
         },
-            modifier = Modifier.width(screenWidth/2).align(Alignment.BottomEnd).padding(10.dp)
+            modifier = Modifier
+                .width(screenWidth / 2)
+                .align(Alignment.BottomEnd)
+                .padding(10.dp)
         ) {
             Text(text = "Confirm")
         }
