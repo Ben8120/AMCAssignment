@@ -11,23 +11,23 @@ import androidx.navigation.NavController
 
 @Composable
 fun pagerButtons(pageNo: Int, navController: NavController) {
-    Button(onClick = { navController.navigate("home") }, modifier = Modifier
+    Button(onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true} } }, modifier = Modifier
         .width(45.dp)
         .padding(end = 10.dp), enabled = true) {
         Text(text = "<")
     }
-    Button(onClick = { navController.navigate("reservation") }, modifier = Modifier
+    Button(onClick = { navController.navigate("reservation") { popUpTo("reservation") { inclusive = true} } }, modifier = Modifier
         .width(45.dp)
         .padding(end = 10.dp), enabled = pageNo >= 1) {
         Text(text = "1")
     }
-    Button(onClick = { navController.navigate("datetime") }, modifier = Modifier
+    Button(onClick = { navController.navigate("datetime") { popUpTo("datetime") { inclusive = true} } }, modifier = Modifier
         .width(45.dp)
         .padding(end = 10.dp), enabled = pageNo > 2
     ) {
         Text(text = "2")
     }
-    Button(onClick = { navController.navigate("maps") }, modifier = Modifier
+    Button(onClick = { navController.navigate("maps") { popUpTo("maps") { inclusive = true} } }, modifier = Modifier
         .width(45.dp)
         .padding(end = 10.dp), enabled = pageNo > 3
     ) {
