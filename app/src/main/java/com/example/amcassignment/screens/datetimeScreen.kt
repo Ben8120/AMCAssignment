@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -22,6 +23,9 @@ import java.util.*
 
 @Composable
 fun datetimeScreen(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     Box(
         modifier = Modifier.fillMaxSize()
     ){
@@ -29,7 +33,7 @@ fun datetimeScreen(navController: NavController) {
         Button(onClick = {
             navController.navigate( "maps")
         },
-            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp)
+            modifier = Modifier.width(screenWidth/2).align(Alignment.BottomEnd).padding(10.dp)
         ) {
             Text(text = "Next")
         }

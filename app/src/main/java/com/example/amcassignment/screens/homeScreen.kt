@@ -20,7 +20,7 @@ import com.example.amcassignment.R
 fun homeScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
 
-    val screenHeight = configuration.screenHeightDp.dp
+    //val screenHeight = configuration.screenHeightDp.dp
     val screenWidth = configuration.screenWidthDp.dp
     Box() {
         Column(

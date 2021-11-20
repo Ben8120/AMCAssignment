@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.input.TextFieldValue
@@ -25,6 +26,9 @@ import java.lang.IllegalStateException
 
 @Composable
 fun mapScreen(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column() {
             Box(
@@ -57,6 +61,7 @@ fun mapScreen(navController: NavController) {
         Button(onClick = {
                          navController.navigate("confirmation")
         }, modifier = Modifier
+            .width(screenWidth/2)
             .align(Alignment.BottomEnd)
             .padding(10.dp)) {
             Text(text = "Next")

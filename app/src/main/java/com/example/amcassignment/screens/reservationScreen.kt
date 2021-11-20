@@ -12,11 +12,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
 fun reservationScreen(navController: NavController  ) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     val scrollState = rememberScrollState()
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -32,9 +36,9 @@ fun reservationScreen(navController: NavController  ) {
         Button(onClick = {
             navController.navigate("datetime")
         }, modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.BottomCenter)
-            .padding(16.dp)) {
+            .width(screenWidth/2)
+            .align(Alignment.BottomEnd)
+            .padding(10.dp)) {
             Text(text = "Next")
         }
     }

@@ -11,12 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
 fun confirmationScreen(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,7 +47,7 @@ fun confirmationScreen(navController: NavController) {
         Button(onClick = {
             navController.navigate("home")
         },
-            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp)
+            modifier = Modifier.width(screenWidth/2).align(Alignment.BottomEnd).padding(10.dp)
         ) {
             Text(text = "Confirm")
         }
