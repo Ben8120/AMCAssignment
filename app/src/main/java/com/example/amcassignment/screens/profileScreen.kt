@@ -16,7 +16,7 @@ import com.example.amcassignment.R
 
 @Composable
 fun profileScreen(navController: NavController) {
-    Box() {
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "Profile Screen")
             Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
@@ -25,15 +25,17 @@ fun profileScreen(navController: NavController) {
             userFields(label = "First Name", data = "Mun")
             userFields(label = "Last Name", data = "Yi")
             userFields(label = "E-mail", data = "munyi624@gmail.com")
-            Button(onClick = {
-                navController.navigate("home") {
-                    popUpTo("home") {
-                        inclusive = true
-                    }
+        }
+        Button(onClick = {
+            navController.navigate("home") {
+                popUpTo("home") {
+                    inclusive = true
                 }
-            }) {
-                Text(text = "Back")
             }
+        },
+            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp).fillMaxWidth()
+        ) {
+            Text(text = "Back")
         }
     }
 

@@ -37,12 +37,15 @@ fun confirmationScreen(navController: NavController) {
                 Text(text = "Date")
                 Text(text = "Time")
                 Text(text = "Location")
-                Button(onClick = {
-                    navController.navigate("home")
-                }) {
-                    Text(text = "Confirm")
-                }
+
             }
+        }
+        Button(onClick = {
+            navController.navigate("home")
+        },
+            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp)
+        ) {
+            Text(text = "Confirm")
         }
     }
 }

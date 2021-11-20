@@ -4,14 +4,16 @@ import android.os.Bundle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
@@ -24,18 +26,39 @@ import java.lang.IllegalStateException
 @Composable
 fun mapScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(450.dp)
-                .clip(RoundedCornerShape(24.dp))
-                .padding(10.dp)
-        ) {
-            myMap(){}
+        Column() {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(450.dp)
+                    .clip(RoundedCornerShape(24.dp))
+                    .padding(10.dp)
+            ) {
+                myMap(){}
+            }
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(10.dp),
+                elevation = 10.dp
+            ) {
+                var text by remember { mutableStateOf(TextFieldValue("")) }
+                OutlinedTextField(
+                    value = text,
+                    label = { Text(text = "type your location") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    onValueChange = {
+                        text = it
+                    }
+                )
+            }
         }
+        
         Button(onClick = {
                          navController.navigate("confirmation")
-        }, modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp)) {
+        }, modifier = Modifier
+            .align(Alignment.BottomEnd)
+            .padding(10.dp)) {
             Text(text = "Next")
         }
     }
