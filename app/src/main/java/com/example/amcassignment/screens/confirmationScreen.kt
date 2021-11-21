@@ -21,7 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun confirmationScreen(navController: NavController) {
+fun confirmationScreen(
+    navController: NavController,
+    services: String?,
+    datetime: String?,
+    location: String?
+) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -42,10 +47,10 @@ fun confirmationScreen(navController: NavController) {
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Services List", Modifier.background(Color.LightGray))
-                Text(text = "Date")
-                Text(text = "Time")
-                Text(text = "Location")
+                Text(text = "${services}", Modifier.background(Color.LightGray))
+                Text(text = "${datetime}")
+                Text(text = "${datetime}")
+                Text(text = "${location}")
 
             }
         }

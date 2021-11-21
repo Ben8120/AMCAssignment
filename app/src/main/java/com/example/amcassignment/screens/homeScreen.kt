@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,7 +34,7 @@ fun homeScreen(navController: NavController) {
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.weight(1.0f))
-            Text(text = "profile card or booking card?")
+            bookCard()
             Spacer(modifier = Modifier.weight(1.0f))
             Row() {
                 Button(onClick = {
@@ -48,11 +49,25 @@ fun homeScreen(navController: NavController) {
                 Button(onClick = {
                     navController.navigate("reservation")
                 },
-                    modifier = Modifier.width(screenWidth/2).padding(10.dp)
+                    modifier = Modifier
+                        .width(screenWidth / 2)
+                        .padding(10.dp)
                 ) {
                     Text(text = "Book")
                 }
             }
         }
+    }
+}
+
+@Composable
+fun bookCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .padding(10.dp), elevation = 10.dp
+    ) {
+        Text(text = "You have not made any Cleaning Reservations yet!")
     }
 }

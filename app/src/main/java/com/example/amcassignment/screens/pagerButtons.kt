@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-
+/*TODO: datetime and maps should have arguments passed instead of hardcode*/
 @Composable
 fun pagerButtons(pageNo: Int, navController: NavController) {
     Button(onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true} } }, modifier = Modifier
@@ -21,13 +21,13 @@ fun pagerButtons(pageNo: Int, navController: NavController) {
         .padding(end = 10.dp), enabled = pageNo >= 1) {
         Text(text = "1")
     }
-    Button(onClick = { navController.navigate("datetime") { popUpTo("datetime") { inclusive = true} } }, modifier = Modifier
+    Button(onClick = { navController.navigate("datetime/Ben") { popUpTo("maps") { inclusive = true} } }, modifier = Modifier
         .width(45.dp)
         .padding(end = 10.dp), enabled = pageNo > 2
     ) {
         Text(text = "2")
     }
-    Button(onClick = { navController.navigate("maps") { popUpTo("maps") { inclusive = true} } }, modifier = Modifier
+    Button(onClick = { navController.navigate("maps/Ben/624") { popUpTo("maps") { inclusive = true} } }, modifier = Modifier
         .width(45.dp)
         .padding(end = 10.dp), enabled = pageNo > 3
     ) {

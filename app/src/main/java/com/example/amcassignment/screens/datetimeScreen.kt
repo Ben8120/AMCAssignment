@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Composable
-fun datetimeScreen(navController: NavController) {
+fun datetimeScreen(navController: NavController, string: String?) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -32,6 +32,9 @@ fun datetimeScreen(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ){
+        if (string != null) {
+            Text(text = string)
+        }
         datetimeComposable(context = LocalContext.current)
         Row(modifier = Modifier
             .width(screenWidth / 2)
@@ -42,7 +45,7 @@ fun datetimeScreen(navController: NavController) {
             pagerButtons(pageNo = 2, navController = navController)
         }
         Button(onClick = {
-            navController.navigate( "maps")
+            navController.navigate( "maps/Ben/624")
         },
             modifier = Modifier
                 .width(screenWidth / 2)

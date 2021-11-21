@@ -27,7 +27,7 @@ import com.google.android.gms.maps.MapView
 import java.lang.IllegalStateException
 
 @Composable
-fun mapScreen(navController: NavController) {
+fun mapScreen(navController: NavController, services: String?, datetime: String?) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -61,6 +61,7 @@ fun mapScreen(navController: NavController) {
                     }
                 )
             }
+            Text(text = "${services} + ${datetime}")
         }
 
         Row(modifier = Modifier
@@ -72,7 +73,7 @@ fun mapScreen(navController: NavController) {
             pagerButtons(pageNo = 3, navController = navController)
         }
         Button(onClick = {
-                         navController.navigate("confirmation")
+                         navController.navigate("confirmation/${services}/${datetime}/Parkhill Residence")
         }, modifier = Modifier
             .width(screenWidth / 2)
             .align(Alignment.BottomEnd)

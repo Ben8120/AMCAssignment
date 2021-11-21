@@ -1,5 +1,6 @@
 package com.example.amcassignment.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -47,7 +48,7 @@ fun reservationScreen(navController: NavController  ) {
         }
         //pager
         Button(onClick = {
-            navController.navigate("datetime")
+            navController.navigate("datetime/Ben")
         }, modifier = Modifier
             .width(screenWidth / 2)
             .align(Alignment.BottomEnd)
