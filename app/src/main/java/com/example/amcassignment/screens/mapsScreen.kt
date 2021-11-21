@@ -70,7 +70,7 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
             .padding(start = 10.dp, bottom = 10.dp)
             .horizontalScroll(scrollPageState)
         ) {
-            pagerButtons(pageNo = 3, navController = navController)
+            pagerButtons(pageNo = 3, navController = navController, services, null)
         }
         Button(onClick = {
                          navController.navigate("confirmation/${services}/${datetime}/Parkhill Residence")

@@ -44,7 +44,7 @@ fun reservationScreen(navController: NavController  ) {
             .padding(start = 10.dp, bottom = 10.dp)
             .horizontalScroll(scrollPageState)
         ) {
-            pagerButtons(pageNo = 0, navController = navController)
+            pagerButtons(pageNo = 0, navController = navController, null, null)
         }
         //pager
         Button(onClick = {

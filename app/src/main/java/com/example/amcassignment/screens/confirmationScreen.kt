@@ -61,7 +61,7 @@ fun confirmationScreen(
             .padding(start = 10.dp, bottom = 10.dp)
             .horizontalScroll(scrollPageState)
         ) {
-            pagerButtons(pageNo = 4, navController = navController)
+            pagerButtons(pageNo = 4, navController = navController, services, datetime)
         }
         val context = LocalContext.current
         Button(onClick = {
