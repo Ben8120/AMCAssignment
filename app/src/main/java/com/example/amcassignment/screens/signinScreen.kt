@@ -64,5 +64,49 @@ fun signinScreen(navController: NavController) {
 
 @Composable
 fun signupScreen(navController: NavController) {
-    Text(text = "Sign up screen")
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Sign up screen")
+            Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
+                .height(75.dp)
+                .width(75.dp))
+            userFields(label = "Email", data = "")
+            userFields(label = "Password", data = "")
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                onClick = {/*TODO*/}) {
+                Text("Sign up")
+            }
+            TextButton(onClick = { navController.navigate("signin") {
+                popUpTo("signin") {
+                    inclusive = true
+                }
+            } }) {
+                Text(text = "Sign in instead")
+            }
+        }
+        Button(onClick = {
+            navController.navigate("home") {
+                popUpTo("home") {
+                    inclusive = true
+                }
+            }
+        },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(10.dp)
+                .width(screenWidth / 2)
+        ) {
+            Text(text = "Back")
+        }
+    }
 }
