@@ -38,7 +38,8 @@ fun homeScreen(navController: NavController) {
             Spacer(modifier = Modifier.weight(1.0f))
             Row() {
                 Button(onClick = {
-                    navController.navigate("profile")
+                    //navController.navigate("profile")
+                    navController.navigate("signin")
                 },
                     modifier = Modifier
                         .width(screenWidth / 2)

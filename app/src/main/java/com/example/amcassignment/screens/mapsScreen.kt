@@ -105,6 +105,7 @@ fun myMap(
                       mapView.getMapAsync{ googleMap ->
                           onReady(googleMap)
                       }
+                      //TODO: add location functions here
                   }
         },
         modifier = Modifier

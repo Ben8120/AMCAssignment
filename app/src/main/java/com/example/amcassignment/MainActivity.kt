@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AMCAssignmentTheme {
+
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home" ){
                     composable("home") { homeScreen(navController) }
@@ -42,6 +43,8 @@ class MainActivity : ComponentActivity() {
 
                     composable("rating"){ ratingScreen()}
                     composable("profile"){ profileScreen(navController)}
+                    composable("signin"){ signinScreen(navController)}
+                    composable("signup"){ signupScreen(navController)}
                 }
                 //Greeting("Ben")
                 //homeScreen()
@@ -53,6 +56,7 @@ class MainActivity : ComponentActivity() {
                 //confirmationScreen()
                 //ratingScreen()
                 //profileScreen()
+                //signinScreen(navController)
             }
         }
     }
