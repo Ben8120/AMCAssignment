@@ -22,8 +22,7 @@ fun profileScreen(navController: NavController) {
             Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
                 .height(75.dp)
                 .width(75.dp))
-            userFields(label = "First Name", data = "Mun")
-            userFields(label = "Last Name", data = "Yi")
+            userFields(label = "Name", data = "Mun Yi")
             userFields(label = "E-mail", data = "munyi624@gmail.com")
         }
         Button(onClick = {

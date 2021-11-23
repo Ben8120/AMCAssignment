@@ -12,6 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.amcassignment.screens.*
+import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
+import com.example.amcassignment.screens_cleaner.viewReviewScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AMCAssignmentTheme {
-
+                /*
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home" ){
                     composable("home") { homeScreen(navController) }
@@ -46,17 +48,13 @@ class MainActivity : ComponentActivity() {
                     composable("signin"){ signinScreen(navController)}
                     composable("signup"){ signupScreen(navController)}
                 }
+                 */
+                val navControllerCleaner = rememberNavController()
+                NavHost(navController = navControllerCleaner, startDestination = "cleanerHomeScreen") {
+                    composable("cleanerHomeScreen"){ cleanerHomeScreen(navControllerCleaner)}
+                    composable("viewReview"){ viewReviewScreen(navControllerCleaner)}
+                }
                 //Greeting("Ben")
-                //homeScreen()
-                //reservationScreen()
-                //datetimeComposable(context = this)
-                //DEPRECATED timeComposable(context = this)
-                //myMap(){}
-                //mapScreen()
-                //confirmationScreen()
-                //ratingScreen()
-                //profileScreen()
-                //signinScreen(navController)
             }
         }
     }

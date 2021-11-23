@@ -77,6 +77,7 @@ fun signupScreen(navController: NavController) {
             Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
                 .height(75.dp)
                 .width(75.dp))
+            userFields(label = "Name", data = "")
             userFields(label = "Email", data = "")
             userFields(label = "Password", data = "")
             Button(
