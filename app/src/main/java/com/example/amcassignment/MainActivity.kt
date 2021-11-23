@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navControllerCleaner, startDestination = "cleanerHomeScreen") {
                     composable("cleanerHomeScreen"){ cleanerHomeScreen(navControllerCleaner)}
                     composable("viewReview"){ viewReviewScreen(navControllerCleaner)}
+                    composable("cleanerProfileScreen"){ cleanerProfileScreen(navControllerCleaner) }
                 }
                 //Greeting("Ben")
             }

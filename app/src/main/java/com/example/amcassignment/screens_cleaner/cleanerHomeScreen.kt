@@ -11,7 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.amcassignment.R
-
+/*TODO: available job list screen, previous job list screen*/
 @Composable
 fun cleanerHomeScreen(navControllerCleaner: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -42,7 +42,7 @@ fun cleanerHomeScreen(navControllerCleaner: NavController) {
             }
             Button(
                 modifier = Modifier.padding(10.dp),
-                onClick = {  }) {
+                onClick = { navControllerCleaner.navigate("cleanerProfileScreen") }) {
                 Text(
                     text = "Profile",
                     modifier = Modifier.fillMaxWidth()
