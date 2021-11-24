@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.amcassignment.model.Post
 import com.example.amcassignment.repository.Repository
 import com.example.amcassignment.screens.*
 import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        
+
         viewModel.getPost()
         viewModel.myResponse.observe(this, Observer { response ->
             if(response.isSuccessful){
@@ -48,6 +49,18 @@ class MainActivity : ComponentActivity() {
                 Log.d("Response", response.body()?.title.toString())
             } else {
                 Log.d("Response", /*response.errorBody().toString()*/ "Err")
+            }
+        })
+
+        val myPost = Post(2,2,"Post Request", "Test Push request")
+        viewModel.pushPost(myPost)
+        viewModel.myResponse2.observe(this, Observer { response ->
+            if(response.isSuccessful){
+                Log.d("Response", response.body().toString())
+                Log.d("Response", response.code().toString())
+                Log.d("Response", response.message().toString())
+            } else {
+                Log.d("Response", response.errorBody().toString())
             }
         })
 
