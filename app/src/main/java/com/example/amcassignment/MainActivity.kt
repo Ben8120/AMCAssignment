@@ -1,16 +1,20 @@
 package com.example.amcassignment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.amcassignment.repository.Repository
 import com.example.amcassignment.screens.*
 import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
 import com.example.amcassignment.screens_cleaner.viewReviewScreen
@@ -19,9 +23,22 @@ import com.example.amcassignment.ui.theme.AMCAssignmentTheme
 class MainActivity : ComponentActivity() {
 
     lateinit var navController: NavHostController
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //initialize retrofit
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getPost()
+        viewModel.myResponse.observe(this, Observer { response ->
+            if(response.isSuccessful){
+                Log.d("Response", response.body()?.title.toString())
+            }
+        })
+
         setContent {
             AMCAssignmentTheme {
                 /*
