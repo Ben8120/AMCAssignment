@@ -52,6 +52,7 @@ fun cleanerFields(label: String, data: String) {
                 .fillMaxWidth()
                 .padding(10.dp),
             value = text,
+            readOnly = true,
             onValueChange = { newText ->
                 text = newText
             })

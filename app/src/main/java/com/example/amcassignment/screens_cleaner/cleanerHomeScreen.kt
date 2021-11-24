@@ -2,11 +2,17 @@ package com.example.amcassignment.screens_cleaner
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -14,16 +20,19 @@ import com.example.amcassignment.R
 /*TODO: available job list screen, previous job list screen*/
 @Composable
 fun cleanerHomeScreen(navControllerCleaner: NavController) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState())) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.cleaner_banner),
                 contentDescription = "Cleaner Banner",
                 modifier = Modifier.fillMaxWidth()
             )
+            Text(text = "Upcoming Jobs", modifier = Modifier.padding(10.dp))
+            workCard()
             Button(
                 modifier = Modifier.padding(10.dp),
                 onClick = {  }) {
@@ -61,5 +70,23 @@ fun cleanerButton(label: String, navi: () -> Unit) {
             text = label,
             modifier = Modifier.fillMaxWidth()
         )
+    }
+}
+
+@Composable
+fun workCard() {
+    Card(
+        elevation = 10.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .padding(10.dp)
+    ) {
+        Column() {
+            Text(text = "ID")
+            Text(text = "datetime")
+            Text(text = "services list")
+        }
     }
 }
