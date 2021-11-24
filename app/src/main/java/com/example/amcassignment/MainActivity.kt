@@ -32,10 +32,22 @@ class MainActivity : ComponentActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        
         viewModel.getPost()
         viewModel.myResponse.observe(this, Observer { response ->
             if(response.isSuccessful){
                 Log.d("Response", response.body()?.title.toString())
+            } else {
+                Log.d("Response", response.errorBody().toString())
+            }
+        })
+
+        viewModel.getPost2(Integer.parseInt("2"))
+        viewModel.myResponse2.observe(this, Observer { response ->
+            if(response.isSuccessful){
+                Log.d("Response", response.body()?.title.toString())
+            } else {
+                Log.d("Response", /*response.errorBody().toString()*/ "Err")
             }
         })
 
