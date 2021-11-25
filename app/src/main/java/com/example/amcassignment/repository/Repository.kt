@@ -18,4 +18,9 @@ class Repository {
     suspend fun pushPost(post: Post): Response<Post> {
         return RetrofitInstance.api.pushPost(post)
     }
+
+    //TEST
+    suspend fun getUserCredentials(post: Post): Response<Post> {
+        return RetrofitInstance.api.getUserCredentials()
+    }
 }

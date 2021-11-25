@@ -63,7 +63,16 @@ class MainActivity : ComponentActivity() {
                 Log.d("Response", response.errorBody().toString())
             }
         })
-
+/*
+        viewModel.getUsercredentials()
+        viewModel.myResponse.observe(this, Observer { response ->
+            if(response.isSuccessful){
+                Log.d("Response", response.body()?.title.toString())
+            } else {
+                Log.d("Response", response.errorBody().toString())
+            }
+        })
+*/
         setContent {
             AMCAssignmentTheme {
                 /*

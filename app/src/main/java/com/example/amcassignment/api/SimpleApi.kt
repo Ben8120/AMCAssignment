@@ -21,4 +21,8 @@ interface SimpleApi {
     suspend fun pushPost(
         @Body post: Post
     ): Response<Post>
+
+    //TEST
+    @POST("api/UserCredentials")
+    suspend fun getUserCredentials(): Response<Post>
 }

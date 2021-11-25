@@ -1,5 +1,6 @@
 package com.example.amcassignment.screens_cleaner
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,8 +16,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.example.amcassignment.MainViewModel
+import com.example.amcassignment.MainViewModelFactory
 import com.example.amcassignment.R
+import com.example.amcassignment.repository.Repository
+
 /*TODO: available job list screen, previous job list screen*/
 @Composable
 fun cleanerHomeScreen(navControllerCleaner: NavController) {
