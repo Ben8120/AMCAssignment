@@ -44,10 +44,12 @@ fun cleanerHomeScreen(navControllerCleaner: NavController) {
             workCard()
             Button(
                 modifier = Modifier.padding(10.dp),
-                onClick = {  }) {
+                onClick = {
+                    navControllerCleaner.navigate("jobDescriptionScreen")
+                }) {
                 Text(
                     text = "See available jobs",
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
             Button(

@@ -18,6 +18,7 @@ import com.example.amcassignment.model.Post
 import com.example.amcassignment.repository.Repository
 import com.example.amcassignment.screens.*
 import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
+import com.example.amcassignment.screens_cleaner.jobDescriptionScreen
 import com.example.amcassignment.screens_cleaner.viewReviewScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
 
@@ -109,6 +110,7 @@ class MainActivity : ComponentActivity() {
                     composable("cleanerHomeScreen"){ cleanerHomeScreen(navController)}
                     composable("viewReview"){ viewReviewScreen(navController)}
                     composable("cleanerProfileScreen"){ cleanerProfileScreen(navController)}
+                    composable("jobDescriptionScreen"){ jobDescriptionScreen(navController)}
                  /* TODO: deprecated, to delete after completion of UI navigation
                 val navControllerCleaner = rememberNavController()
                 NavHost(navController = navControllerCleaner, startDestination = "cleanerHomeScreen") {
