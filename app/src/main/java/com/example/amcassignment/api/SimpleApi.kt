@@ -27,7 +27,5 @@ interface SimpleApi {
     suspend fun getUserCredentials(): Response<UserCredentials>
 
     @GET("api/UserCredentials")
-    suspend fun getUserCredentialsList(
-        @Query("name") name: String
-    ) : Response<List<UserCredentials>>
+    suspend fun getUserCredentialsList() : Response<List<UserCredentials>>
 }
