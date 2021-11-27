@@ -38,7 +38,14 @@ fun signinScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
-                onClick = {/*TODO*/}) {
+                onClick = {
+                    //TODO: validate credentials before signing in
+                    navController.navigate("home") {
+                        popUpTo("home") {
+                            inclusive = true
+                        }
+                    }
+                }) {
                 Text("Sign in")
             }
             TextButton(onClick = { navController.navigate("signup") }) {
@@ -46,8 +53,8 @@ fun signinScreen(navController: NavController) {
             }
         }
         Button(onClick = {
-            navController.navigate("home") {
-                popUpTo("home") {
+            navController.navigate("splashscreen") {
+                popUpTo("splashscreen") {
                     inclusive = true
                 }
             }
@@ -84,20 +91,29 @@ fun signupScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
-                onClick = {/*TODO*/}) {
+                onClick = {
+                /*TODO*/
+                    navController.navigate("home") {
+                        popUpTo("home") {
+                            inclusive = true
+                        }
+                    }
+                }) {
                 Text("Sign up")
             }
-            TextButton(onClick = { navController.navigate("signin") {
-                popUpTo("signin") {
-                    inclusive = true
+            TextButton(onClick = {
+                navController.navigate("signin") {
+                    popUpTo("signin") {
+                        inclusive = true
+                    }
                 }
-            } }) {
+            }) {
                 Text(text = "Sign in instead")
             }
         }
         Button(onClick = {
-            navController.navigate("home") {
-                popUpTo("home") {
+            navController.navigate("splashscreen") {
+                popUpTo("splashscreen") {
                     inclusive = true
                 }
             }

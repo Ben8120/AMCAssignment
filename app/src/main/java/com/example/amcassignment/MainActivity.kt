@@ -78,9 +78,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AMCAssignmentTheme {
-/*
+
                 val navController = rememberNavController()
-                NavHost(navController, startDestination = "home" ){
+                NavHost(navController, startDestination = "splashscreen" ){
                     composable("home") { homeScreen(navController) }
 
                     composable("reservation"){ reservationScreen(navController)}
@@ -101,14 +101,16 @@ class MainActivity : ComponentActivity() {
                     composable("profile"){ profileScreen(navController)}
                     composable("signin"){ signinScreen(navController)}
                     composable("signup"){ signupScreen(navController)}
+
+                    composable("splashscreen"){ splashScreen(navController)}
                 }
-                 */
+                 /*
                 val navControllerCleaner = rememberNavController()
                 NavHost(navController = navControllerCleaner, startDestination = "cleanerHomeScreen") {
                     composable("cleanerHomeScreen"){ cleanerHomeScreen(navControllerCleaner)}
                     composable("viewReview"){ viewReviewScreen(navControllerCleaner)}
                     composable("cleanerProfileScreen"){ cleanerProfileScreen(navControllerCleaner) }
-                }
+                }*/
                 //Greeting("Ben")
             }
         }

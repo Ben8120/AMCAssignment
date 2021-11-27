@@ -29,9 +29,9 @@ fun homeScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.cleaner_banner),
-                contentDescription = "Cleaner Banner",
-                modifier = Modifier.fillMaxWidth()
+                    painter = painterResource(id = R.drawable.cleaner_banner),
+                    contentDescription = "Cleaner Banner",
+                    modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.weight(1.0f))
             bookCard()
@@ -39,7 +39,7 @@ fun homeScreen(navController: NavController) {
             Row() {
                 Button(onClick = {
                     //navController.navigate("profile")
-                    navController.navigate("signin")
+                    navController.navigate("profile")
                 },
                     modifier = Modifier
                         .width(screenWidth / 2)
