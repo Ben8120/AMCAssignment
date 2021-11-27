@@ -1,12 +1,14 @@
 package com.example.amcassignment.repository
 
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.utils.RetrofitInstance
 import retrofit2.Response
 import retrofit2.Retrofit
 
 class Repository {
 
+    /* TEST
     suspend fun getPost(): Response<Post> {
         return RetrofitInstance.api.getPost()
     }
@@ -18,9 +20,10 @@ class Repository {
     suspend fun pushPost(post: Post): Response<Post> {
         return RetrofitInstance.api.pushPost(post)
     }
+     */
 
-    //TEST
-    suspend fun getUserCredentials(post: Post): Response<Post> {
+    //User credentials
+    suspend fun getUserCredentials(): Response<UserCredentials> {
         return RetrofitInstance.api.getUserCredentials()
     }
 }

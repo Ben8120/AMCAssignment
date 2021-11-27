@@ -1,14 +1,13 @@
 package com.example.amcassignment.api
 
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.UserCredentials
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface SimpleApi {
 
+    /*TEST
     @GET("posts/1")
     suspend fun getPost(): Response<Post>
 
@@ -21,8 +20,14 @@ interface SimpleApi {
     suspend fun pushPost(
         @Body post: Post
     ): Response<Post>
+     */
 
-    //TEST
-    @POST("api/UserCredentials")
-    suspend fun getUserCredentials(): Response<Post>
+    //my api here
+    @GET("api/UserCredentials/0")
+    suspend fun getUserCredentials(): Response<UserCredentials>
+
+    @GET("api/UserCredentials")
+    suspend fun getUserCredentialsList(
+        @Query("name") name: String
+    ) : Response<List<UserCredentials>>
 }

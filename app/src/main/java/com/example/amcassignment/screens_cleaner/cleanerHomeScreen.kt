@@ -23,10 +23,12 @@ import com.example.amcassignment.MainViewModel
 import com.example.amcassignment.MainViewModelFactory
 import com.example.amcassignment.R
 import com.example.amcassignment.repository.Repository
+import com.squareup.picasso.Picasso
 
 /*TODO: available job list screen, previous job list screen*/
 @Composable
 fun cleanerHomeScreen(navControllerCleaner: NavController) {
+    //Picasso.get().load("https://www.mypets.net.au/wp-content/uploads/2019/05/munchkin-cat-1-1200x964.jpg").placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background).into()
     Box(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())) {

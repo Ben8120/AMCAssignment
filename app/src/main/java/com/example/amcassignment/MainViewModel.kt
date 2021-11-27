@@ -4,12 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MainViewModel(private val repository: Repository): ViewModel() {
 
+    /* Test API
     val myResponse: MutableLiveData<Response<Post>> = MutableLiveData()
     val myResponse2: MutableLiveData<Response<Post>> = MutableLiveData()
 
@@ -33,11 +35,14 @@ class MainViewModel(private val repository: Repository): ViewModel() {
             myResponse2.value = response
         }
     }
+     */
+    val userCredentialsResponse: MutableLiveData<Response<UserCredentials>> = MutableLiveData()
+    var userCredentialsListResponse: MutableLiveData<Response<List<UserCredentials>>> = MutableLiveData()
 
-    fun getUsercredentials() {
+    fun getUserCredentials() {
         viewModelScope.launch {
-            val response : Response<Post> = repository.getPost()
-            myResponse.value = response
+            val response : Response<UserCredentials> = repository.getUserCredentials()
+            userCredentialsResponse.value = response
         }
     }
 }

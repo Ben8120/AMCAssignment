@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
+/* Test API
         viewModel.getPost()
         viewModel.myResponse.observe(this, Observer { response ->
             if(response.isSuccessful){
@@ -62,20 +62,23 @@ class MainActivity : ComponentActivity() {
             } else {
                 Log.d("Response", response.errorBody().toString())
             }
-        })
-/*
-        viewModel.getUsercredentials()
-        viewModel.myResponse.observe(this, Observer { response ->
+        })*/
+
+        viewModel.getUserCredentials()
+        viewModel.userCredentialsResponse.observe(this, Observer { response ->
+            Log.d("Response", "Testing connection...")
             if(response.isSuccessful){
-                Log.d("Response", response.body()?.title.toString())
+                Log.d("Response", response.body()?.email.toString())
             } else {
                 Log.d("Response", response.errorBody().toString())
+                Log.d("Response", "Error")
+                Log.d("Response", response.code().toString())
             }
         })
-*/
+
         setContent {
             AMCAssignmentTheme {
-                /*
+/*
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home" ){
                     composable("home") { homeScreen(navController) }
