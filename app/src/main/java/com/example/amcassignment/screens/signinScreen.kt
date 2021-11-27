@@ -51,6 +51,9 @@ fun signinScreen(navController: NavController) {
             TextButton(onClick = { navController.navigate("signup") }) {
                 Text(text = "Sign up instead")
             }
+            TextButton(onClick = { navController.navigate("cleanerHomeScreen") }) {
+                Text(text = "DEBUG CLEANERBUTTON (DELETE)")
+            }
         }
         Button(onClick = {
             navController.navigate("splashscreen") {

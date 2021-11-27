@@ -81,6 +81,9 @@ class MainActivity : ComponentActivity() {
 
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "splashscreen" ){
+
+                    composable("splashscreen"){ splashScreen(navController)}
+
                     composable("home") { homeScreen(navController) }
 
                     composable("reservation"){ reservationScreen(navController)}
@@ -102,9 +105,11 @@ class MainActivity : ComponentActivity() {
                     composable("signin"){ signinScreen(navController)}
                     composable("signup"){ signupScreen(navController)}
 
-                    composable("splashscreen"){ splashScreen(navController)}
-                }
-                 /*
+                    //Cleaner screens
+                    composable("cleanerHomeScreen"){ cleanerHomeScreen(navController)}
+                    composable("viewReview"){ viewReviewScreen(navController)}
+                    composable("cleanerProfileScreen"){ cleanerProfileScreen(navController)}
+                 /* TODO: deprecated, to delete after completion of UI navigation
                 val navControllerCleaner = rememberNavController()
                 NavHost(navController = navControllerCleaner, startDestination = "cleanerHomeScreen") {
                     composable("cleanerHomeScreen"){ cleanerHomeScreen(navControllerCleaner)}
@@ -112,6 +117,7 @@ class MainActivity : ComponentActivity() {
                     composable("cleanerProfileScreen"){ cleanerProfileScreen(navControllerCleaner) }
                 }*/
                 //Greeting("Ben")
+                }
             }
         }
     }

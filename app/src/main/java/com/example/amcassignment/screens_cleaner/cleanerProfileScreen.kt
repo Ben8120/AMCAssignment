@@ -17,14 +17,31 @@ import com.example.amcassignment.R
 @Composable
 fun cleanerProfileScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Profile Screen")
-            Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
-                .height(75.dp)
-                .width(75.dp))
-            cleanerFields(label = "Name", data = "Chua Ben Shern")
-            cleanerFields(label = "E-mail", data = "chuabenshern5@gmail.com")
+        Column(
+            horizontalAlignment = Alignment.End
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "Profile Screen")
+                Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
+                    .height(75.dp)
+                    .width(75.dp))
+                cleanerFields(label = "Name", data = "Chua Ben Shern")
+                cleanerFields(label = "E-mail", data = "chuabenshern5@gmail.com")
+            }
+            Button(
+                modifier = Modifier.padding(10.dp),
+                onClick = {
+                    navController.navigate("splashscreen") {
+                        popUpTo("splashscreen") {
+                            inclusive = true
+                        }
+                    }
+                }
+            ) {
+                Text(text = "Sign out")
+            }
         }
+
         Button(onClick = {
             navController.navigate("cleanerHomeScreen") {
                 popUpTo("cleanerHomeScreen") {
@@ -32,7 +49,10 @@ fun cleanerProfileScreen(navController: NavController) {
                 }
             }
         },
-            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp).fillMaxWidth()
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(10.dp)
+                .fillMaxWidth()
         ) {
             Text(text = "Back")
         }
@@ -46,7 +66,10 @@ fun cleanerFields(label: String, data: String) {
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(10.dp)) {
-        Text(text = label, Modifier.width(100.dp).padding(top = 15.dp))
+        Text(text = label,
+            Modifier
+                .width(100.dp)
+                .padding(top = 15.dp))
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
