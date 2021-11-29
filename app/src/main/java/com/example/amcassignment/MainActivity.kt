@@ -82,6 +82,18 @@ class MainActivity : ComponentActivity() {
             }
         })
 
+        viewModel.getUserCredentialsList()
+        viewModel.userCredentialsListResponse.observe(this, Observer { response ->
+            Log.d("Response", "Testing list connection...")
+            if(response.isSuccessful){
+                Log.d("Response", response.body().toString())
+            } else {
+                Log.d("Response", response.errorBody().toString())
+                Log.d("Response", "Error")
+                Log.d("Response", response.code().toString())
+            }
+        })
+
         setContent {
             AMCAssignmentTheme {
 

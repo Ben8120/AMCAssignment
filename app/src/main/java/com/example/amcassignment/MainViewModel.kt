@@ -45,4 +45,11 @@ class MainViewModel(private val repository: Repository): ViewModel() {
             userCredentialsResponse.value = response
         }
     }
+
+    fun getUserCredentialsList() {
+        viewModelScope.launch {
+            val response : Response<List<UserCredentials>> = repository.getUserCredentialsList()
+            userCredentialsListResponse.value = response
+        }
+    }
 }

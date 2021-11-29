@@ -26,4 +26,9 @@ class Repository {
     suspend fun getUserCredentials(userId: Int): Response<UserCredentials> {
         return RetrofitInstance.api.getUserCredentials(userId)
     }
+
+    //List of User Credentials
+    suspend fun getUserCredentialsList(): Response<List<UserCredentials>> {
+        return RetrofitInstance.api.getUserCredentialsList()
+    }
 }
