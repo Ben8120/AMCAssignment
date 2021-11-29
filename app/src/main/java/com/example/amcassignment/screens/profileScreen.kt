@@ -11,11 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.example.amcassignment.MainActivity
+import com.example.amcassignment.MainViewModel
+import com.example.amcassignment.MainViewModelFactory
 import com.example.amcassignment.R
+import com.example.amcassignment.repository.Repository
 
 @Composable
-fun profileScreen(navController: NavController) {
+fun profileScreen(navController: NavController,  name: String, email: String) {
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(horizontalAlignment = Alignment.End) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -23,8 +30,8 @@ fun profileScreen(navController: NavController) {
                 Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
                     .height(75.dp)
                     .width(75.dp))
-                userFields(label = "Name", data = "Mun Yi")
-                userFields(label = "E-mail", data = "munyi624@gmail.com")
+                userFields(label = "Name", data = name)
+                userFields(label = "E-mail", data = email)
             }
             Button(
                 modifier = Modifier.padding(10.dp),

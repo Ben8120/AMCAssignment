@@ -23,9 +23,14 @@ interface SimpleApi {
      */
 
     //my api here
-    @GET("api/UserCredentials/0")
-    suspend fun getUserCredentials(): Response<UserCredentials>
 
+    //GET UserCredentials by id
+    @GET("api/UserCredentials/{userId}")
+    suspend fun getUserCredentials(
+        @Path("userId") userId: Int
+    ): Response<UserCredentials>
+
+    //GET all UserCredentials
     @GET("api/UserCredentials")
     suspend fun getUserCredentialsList() : Response<List<UserCredentials>>
 }

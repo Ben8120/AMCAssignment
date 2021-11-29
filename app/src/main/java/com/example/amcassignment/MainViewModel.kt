@@ -39,9 +39,9 @@ class MainViewModel(private val repository: Repository): ViewModel() {
     val userCredentialsResponse: MutableLiveData<Response<UserCredentials>> = MutableLiveData()
     var userCredentialsListResponse: MutableLiveData<Response<List<UserCredentials>>> = MutableLiveData()
 
-    fun getUserCredentials() {
+    fun getUserCredentials(userId: Int) {
         viewModelScope.launch {
-            val response : Response<UserCredentials> = repository.getUserCredentials()
+            val response : Response<UserCredentials> = repository.getUserCredentials(userId)
             userCredentialsResponse.value = response
         }
     }

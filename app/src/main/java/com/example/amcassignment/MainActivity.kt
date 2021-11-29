@@ -30,6 +30,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var email: String  = ""
+        var name: String = ""
+
         //initialize retrofit
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -65,11 +68,13 @@ class MainActivity : ComponentActivity() {
             }
         })*/
 
-        viewModel.getUserCredentials()
+        viewModel.getUserCredentials(Integer.parseInt("1"))
         viewModel.userCredentialsResponse.observe(this, Observer { response ->
             Log.d("Response", "Testing connection...")
             if(response.isSuccessful){
                 Log.d("Response", response.body()?.email.toString())
+                name = response.body()?.name.toString()
+                email = response.body()?.email.toString()
             } else {
                 Log.d("Response", response.errorBody().toString())
                 Log.d("Response", "Error")
@@ -102,7 +107,7 @@ class MainActivity : ComponentActivity() {
                     ){ backStackEntry -> confirmationScreen(navController, backStackEntry.arguments?.getString("services"), backStackEntry.arguments?.getString("datetime"), backStackEntry.arguments?.getString("location"))}
 
                     composable("rating"){ ratingScreen()}
-                    composable("profile"){ profileScreen(navController)}
+                    composable("profile"){ profileScreen(navController, name, email)}
                     composable("signin"){ signinScreen(navController)}
                     composable("signup"){ signupScreen(navController)}
 
