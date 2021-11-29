@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import com.example.amcassignment.R
 
 @Composable
-fun cleanerProfileScreen(navController: NavController) {
+fun cleanerProfileScreen(navController: NavController, name: String, email: String) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             horizontalAlignment = Alignment.End
@@ -25,8 +25,8 @@ fun cleanerProfileScreen(navController: NavController) {
                 Icon(painter = painterResource(id = R.drawable.ic_baseline_person_24), contentDescription = "Profile Logo", modifier = Modifier
                     .height(75.dp)
                     .width(75.dp))
-                cleanerFields(label = "Name", data = "Chua Ben Shern")
-                cleanerFields(label = "E-mail", data = "chuabenshern5@gmail.com")
+                cleanerFields(label = "Name", data = name)
+                cleanerFields(label = "E-mail", data = email)
             }
             Button(
                 modifier = Modifier.padding(10.dp),

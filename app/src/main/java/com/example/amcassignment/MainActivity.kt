@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
             }
         })*/
 
-        viewModel.getUserCredentials(Integer.parseInt("1"))
+        viewModel.getUserCredentials(Integer.parseInt("0"))
         viewModel.userCredentialsResponse.observe(this, Observer { response ->
             Log.d("Response", "Testing connection...")
             if(response.isSuccessful){
@@ -114,7 +114,7 @@ class MainActivity : ComponentActivity() {
                     //Cleaner screens
                     composable("cleanerHomeScreen"){ cleanerHomeScreen(navController)}
                     composable("viewReview"){ viewReviewScreen(navController)}
-                    composable("cleanerProfileScreen"){ cleanerProfileScreen(navController)}
+                    composable("cleanerProfileScreen"){ cleanerProfileScreen(navController, name, email)}
                     composable("jobDescriptionScreen"){ jobDescriptionScreen(navController)}
                  /* TODO: deprecated, to delete after completion of UI navigation
                 val navControllerCleaner = rememberNavController()
