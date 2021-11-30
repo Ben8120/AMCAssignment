@@ -1,6 +1,7 @@
 package com.example.amcassignment.repository
 
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.Services
 import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.utils.RetrofitInstance
 import retrofit2.Response
@@ -30,5 +31,10 @@ class Repository {
     //List of User Credentials
     suspend fun getUserCredentialsList(): Response<List<UserCredentials>> {
         return RetrofitInstance.api.getUserCredentialsList()
+    }
+
+    ///list of Services
+    suspend fun getServices(): Response<List<Services>> {
+        return RetrofitInstance.api.getServices()
     }
 }

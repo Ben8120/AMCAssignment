@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
             }
         })*/
 
-        viewModel.getUserCredentials(Integer.parseInt("0"))
+        viewModel.getUserCredentials(Integer.parseInt("1"))
         viewModel.userCredentialsResponse.observe(this, Observer { response ->
             Log.d("Response", "Testing connection...")
             if(response.isSuccessful){
@@ -91,6 +91,15 @@ class MainActivity : ComponentActivity() {
                 Log.d("Response", response.errorBody().toString())
                 Log.d("Response", "Error")
                 Log.d("Response", response.code().toString())
+            }
+        })
+
+        viewModel.getServicesList()
+        viewModel.servicesListResponse.observe(this, Observer { response  ->
+            if (response.isSuccessful){
+                Log.d("Response", response.body().toString())
+            } else {
+                Log.d("Response", "err")
             }
         })
 

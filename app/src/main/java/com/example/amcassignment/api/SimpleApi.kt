@@ -1,6 +1,7 @@
 package com.example.amcassignment.api
 
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.Services
 import com.example.amcassignment.model.UserCredentials
 import retrofit2.Response
 import retrofit2.http.*
@@ -33,4 +34,8 @@ interface SimpleApi {
     //GET all UserCredentials
     @GET("api/UserCredentials")
     suspend fun getUserCredentialsList(): Response<List<UserCredentials>>
+
+    //GET all services
+    @GET("api/Services")
+    suspend fun getServices(): Response<List<Services>>
 }

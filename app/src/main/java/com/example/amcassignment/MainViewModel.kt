@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.Services
 import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.repository.Repository
 import kotlinx.coroutines.launch
@@ -38,6 +39,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
      */
     val userCredentialsResponse: MutableLiveData<Response<UserCredentials>> = MutableLiveData()
     var userCredentialsListResponse: MutableLiveData<Response<List<UserCredentials>>> = MutableLiveData()
+    var servicesListResponse: MutableLiveData<Response<List<Services>>> = MutableLiveData()
 
     fun getUserCredentials(userId: Int) {
         viewModelScope.launch {
@@ -50,6 +52,13 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         viewModelScope.launch {
             val response : Response<List<UserCredentials>> = repository.getUserCredentialsList()
             userCredentialsListResponse.value = response
+        }
+    }
+
+    fun getServicesList() {
+        viewModelScope.launch {
+            val response : Response<List<Services>> = repository.getServices()
+            servicesListResponse.value = response
         }
     }
 }
