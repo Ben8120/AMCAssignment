@@ -15,12 +15,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.amcassignment.model.Post
+import com.example.amcassignment.model.Services
 import com.example.amcassignment.repository.Repository
 import com.example.amcassignment.screens.*
 import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
 import com.example.amcassignment.screens_cleaner.jobDescriptionScreen
 import com.example.amcassignment.screens_cleaner.viewReviewScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
+import kotlin.reflect.typeOf
 
 class MainActivity : ComponentActivity() {
 
@@ -32,6 +34,8 @@ class MainActivity : ComponentActivity() {
 
         var email: String  = ""
         var name: String = ""
+
+        var serviceList = emptyList<Services>()
 
         //initialize retrofit
         val repository = Repository()
@@ -98,6 +102,8 @@ class MainActivity : ComponentActivity() {
         viewModel.servicesListResponse.observe(this, Observer { response  ->
             if (response.isSuccessful){
                 Log.d("Response", response.body().toString())
+                serviceList = response.body()!!
+                Log.d("Response", serviceList.toString())
             } else {
                 Log.d("Response", "err")
             }
@@ -113,7 +119,7 @@ class MainActivity : ComponentActivity() {
 
                     composable("home") { homeScreen(navController) }
 
-                    composable("reservation"){ reservationScreen(navController)}
+                    composable("reservation"){ reservationScreen(navController, serviceList)}
 
                     composable("datetime/{services}",
                         arguments = listOf(navArgument("services") {type = NavType.StringType})

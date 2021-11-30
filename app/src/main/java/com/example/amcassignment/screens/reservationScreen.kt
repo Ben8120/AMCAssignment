@@ -17,9 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.amcassignment.model.Services
 
 @Composable
-fun reservationScreen(navController: NavController  ) {
+fun reservationScreen(navController: NavController, serviceList: List<Services> ) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -32,8 +33,8 @@ fun reservationScreen(navController: NavController  ) {
                 .verticalScroll(scrollState)
         ) {
             Text(text = "reservation screen")
-            repeat(15){
-                serviceCard()
+            serviceList.forEach{ service ->
+                serviceCard(service = service.service1)
             }
         }
         //pager
@@ -59,7 +60,7 @@ fun reservationScreen(navController: NavController  ) {
 }
 
 @Composable
-fun serviceCard() {
+fun serviceCard(service: String) {
     val checkedState = remember{ mutableStateOf(false)}
     Card(
         modifier = Modifier
@@ -73,7 +74,7 @@ fun serviceCard() {
                 onCheckedChange = {checkedState.value = it},
                 modifier = Modifier.padding(16.dp)
             )
-            Text(text = "[cleaning service]", modifier = Modifier.padding(16.dp))
+            Text(text = service, modifier = Modifier.padding(16.dp))
         }
     }
 }
