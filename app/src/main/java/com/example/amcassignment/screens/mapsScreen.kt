@@ -1,6 +1,7 @@
 package com.example.amcassignment.screens
 
 import android.os.Bundle
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -13,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -24,7 +26,16 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
-import java.lang.IllegalStateException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import com.google.android.libraries.maps.CameraUpdateFactory
+import com.google.android.libraries.maps.model.LatLng
+import com.google.android.libraries.maps.model.MarkerOptions
+import com.google.android.libraries.maps.model.PolylineOptions
+import com.google.maps.android.ktx.awaitMap
+//import com.jetpack.googlemap.ui.theme.GoogleMapTheme
+
 
 @Composable
 fun mapScreen(navController: NavController, services: String?, datetime: String?) {
@@ -83,6 +94,63 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
     }
 
 }
+
+//New map here
+@Composable
+fun GoogleMap() {
+    val mapView = rememberMapViewWithLifeCycler()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+        AndroidView(
+            {mapView}
+        ) { mapView ->
+            CoroutineScope(Dispatchers.Main).launch {
+                //val map = mapView.awaitMap()
+            }
+        }
+    }
+}
+
+@Composable
+fun rememberMapViewWithLifeCycler(): MapView {
+    val context = LocalContext.current
+    val mapView = remember {
+        MapView(context).apply {
+            id = com.google.maps.android.ktx.R.id.map_frame
+        }
+    }
+    val lifeCycleObserver = rememberMapLifeCycleObserver(mapView)
+    val lifeCycle = LocalLifecycleOwner.current.lifecycle
+    DisposableEffect(lifeCycle) {
+        lifeCycle.addObserver(lifeCycleObserver)
+        onDispose {
+            lifeCycle.removeObserver(lifeCycleObserver)
+        }
+    }
+
+    return mapView
+}
+
+@Composable
+fun rememberMapLifeCycleObserver(mapView: MapView): LifecycleEventObserver =
+    remember(mapView) {
+        LifecycleEventObserver { _, event ->
+            when(event) {
+                Lifecycle.Event.ON_CREATE -> mapView.onCreate(Bundle())
+                Lifecycle.Event.ON_START -> mapView.onStart()
+                Lifecycle.Event.ON_RESUME -> mapView.onResume()
+                Lifecycle.Event.ON_PAUSE -> mapView.onPause()
+                Lifecycle.Event.ON_STOP -> mapView.onStop()
+                Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
+                else -> throw IllegalStateException()
+            }
+        }
+    }
+//New map end here
 
 @Composable
 fun myMap(

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -33,7 +34,73 @@ fun datetimeScreen(navController: NavController, services: String?) {
         modifier = Modifier.fillMaxSize()
     ){
         Text(text = "${services}")
-        datetimeComposable(context = LocalContext.current)
+
+
+        //datetimeComposable(context = LocalContext.current)
+        val mYear: Int
+        val mMonth: Int
+        val mDay: Int
+        val now = Calendar.getInstance()
+        var dateStr: String
+        var yearStr: String
+        mYear = now.get(Calendar.YEAR)
+        mMonth = now.get(Calendar.MONTH)
+        mDay = now.get(Calendar.DAY_OF_MONTH)
+        now.time = Date()
+        val date = remember { mutableStateOf(" ") }
+        val datePickerDialog = DatePickerDialog(
+            LocalContext.current,
+            { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                val cal = Calendar.getInstance()
+                cal.set(year, month, dayOfMonth)
+                //date.value = cal.time.toString()
+                dateStr = cal.time.toString().substring(0..10)
+                yearStr = cal.time.toString().substring(29..33)
+                date.value = "$dateStr $yearStr"
+            }, mYear, mMonth, mDay
+        )
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row() {
+                Button(onClick = {
+                    datePickerDialog.show()
+                },
+                    modifier = Modifier.padding(10.dp)
+                ) {
+                    Text(text = "Date Picker")
+                }
+                //Spacer(modifier = Modifier.size(16.dp))
+                Text(text = "Selected date: ${date.value}", modifier = Modifier.padding(10.dp))
+            }
+            val calendar = Calendar.getInstance()
+            val hour = calendar[Calendar.HOUR_OF_DAY]
+            val minute = calendar[Calendar.MINUTE]
+
+            val time = remember { mutableStateOf("")}
+            val timePickerDialog = TimePickerDialog(
+                LocalContext.current,
+                {_, hour: Int, minute: Int ->
+                    time.value = "$hour:$minute"
+                    date.value = date.value + " ${time.value}"
+
+                }, hour, minute, false
+            )
+            Row() {
+                Button(onClick = {
+                    timePickerDialog.show()
+                },
+                    modifier = Modifier.padding(10.dp)
+                ) {
+                    Text(text = "Time Picker")
+                }
+                Text(text = "Selected Time: ${time.value}", modifier = Modifier.padding(10.dp))
+            }
+        }
+        //end datetime composable
+
         Row(modifier = Modifier
             .width(screenWidth / 2)
             .align(Alignment.BottomStart)
@@ -42,8 +109,13 @@ fun datetimeScreen(navController: NavController, services: String?) {
         )  {
             pagerButtons(pageNo = 2, navController = navController, services, null)
         }
+        val context = LocalContext.current
         Button(onClick = {
-            navController.navigate( "maps/Ben/624")
+            if (date.value.isNullOrBlank()) {
+                Toast.makeText(context, "Please provide date and time", Toast.LENGTH_SHORT).show()
+            } else {
+                navController.navigate( "maps/$services/${date.value}")
+            }
         },
             modifier = Modifier
                 .width(screenWidth / 2)
@@ -56,7 +128,7 @@ fun datetimeScreen(navController: NavController, services: String?) {
 }
 
 @Composable
-fun datetimeComposable(context: Context) {
+fun datetimeComposable(context: Context) : String{
     val mYear: Int
     val mMonth: Int
     val mDay: Int
@@ -77,7 +149,6 @@ fun datetimeComposable(context: Context) {
             dateStr = cal.time.toString().substring(0..10)
             yearStr = cal.time.toString().substring(29..33)
             date.value = dateStr+yearStr
-            //date.value = getFormattedDate(cal.time, "dd MMM,yyy")
         }, mYear, mMonth, mDay
     )
     Column(
@@ -119,6 +190,7 @@ fun datetimeComposable(context: Context) {
             Text(text = "Selected Time: ${time.value}", modifier = Modifier.padding(10.dp))
         }
     }
+    return date.value
 }
 
 //can delete, no use anymore

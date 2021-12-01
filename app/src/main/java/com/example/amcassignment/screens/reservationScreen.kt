@@ -23,7 +23,7 @@ fun reservationScreen(navController: NavController, serviceList: List<Services> 
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
-    var serviceString: String = ""
+    var serviceString: String = " "
 
     val scrollState = rememberScrollState()
     val scrollPageState = rememberScrollState()
@@ -64,7 +64,7 @@ fun reservationScreen(navController: NavController, serviceList: List<Services> 
         }
         //pager
         Button(onClick = {
-            navController.navigate("datetime/Ben")
+            navController.navigate("datetime/$serviceString")
         }, modifier = Modifier
             .width(screenWidth / 2)
             .align(Alignment.BottomEnd)

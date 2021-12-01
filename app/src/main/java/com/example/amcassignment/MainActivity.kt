@@ -111,7 +111,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AMCAssignmentTheme {
-
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "splashscreen" ){
 
