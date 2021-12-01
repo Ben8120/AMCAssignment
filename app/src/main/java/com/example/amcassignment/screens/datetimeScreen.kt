@@ -61,6 +61,8 @@ fun datetimeComposable(context: Context) {
     val mMonth: Int
     val mDay: Int
     val now = Calendar.getInstance()
+    var dateStr: String
+    var yearStr: String
     mYear = now.get(Calendar.YEAR)
     mMonth = now.get(Calendar.MONTH)
     mDay = now.get(Calendar.DAY_OF_MONTH)
@@ -71,7 +73,10 @@ fun datetimeComposable(context: Context) {
         { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             val cal = Calendar.getInstance()
             cal.set(year, month, dayOfMonth)
-            date.value = cal.time.toString()
+            //date.value = cal.time.toString()
+            dateStr = cal.time.toString().substring(0..10)
+            yearStr = cal.time.toString().substring(29..33)
+            date.value = dateStr+yearStr
             //date.value = getFormattedDate(cal.time, "dd MMM,yyy")
         }, mYear, mMonth, mDay
     )
