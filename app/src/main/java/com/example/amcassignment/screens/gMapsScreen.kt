@@ -16,8 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.maps.CameraUpdateFactory
 import com.google.android.libraries.maps.MapView
 import com.google.android.libraries.maps.model.LatLng
@@ -30,7 +33,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun GoogleMap2() {
+fun GoogleMap2(lat: String, long: String) {
+
     val mapView = rememberMapViewWithLifeCycle()
 
     Column(
@@ -44,26 +48,26 @@ fun GoogleMap2() {
             CoroutineScope(Dispatchers.Main).launch {
                 val map = mapView.awaitMap()
                 map.uiSettings.isZoomControlsEnabled = true
-                val pickUp = LatLng(28.7041, 77.1025) //Delhi
-                val destination = LatLng(12.9716, 77.5946) //Bangalore
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 6f))
+                val pickUp = LatLng(lat.toDouble(), long.toDouble()) //Delhi
+                //val destination = LatLng(12.9716, 77.5946) //Bangalore
+                //map.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 6f))
                 val markerOptions =  MarkerOptions()
                     .title("Delhi")
                     .position(pickUp)
                 map.addMarker(markerOptions)
-                val markerOptionsDestination = MarkerOptions()
-                    .title("Bangalore")
-                    .position(destination)
-                map.addMarker(markerOptionsDestination)
+                //val markerOptionsDestination = MarkerOptions()
+                //    .title("Bangalore")
+                //    .position(destination)
+                //map.addMarker(markerOptionsDestination)
 
-                map.addPolyline(
-                    PolylineOptions().add(
-                        pickUp,
-                        LatLng(22.2587, 71.1924), //Root of Gujarat
-                        LatLng(19.7515, 75.7139), //Root of Maharashtra
-                        destination
-                    )
-                )
+                //map.addPolyline(
+                //    PolylineOptions().add(
+                //        pickUp,
+                //        LatLng(22.2587, 71.1924), //Root of Gujarat
+                //        LatLng(19.7515, 75.7139), //Root of Maharashtra
+                //        destination
+                //    )
+                //)
             }
         }
     }
@@ -104,12 +108,3 @@ fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserver =
             }
         }
     }
-
-
-
-
-
-
-
-
-

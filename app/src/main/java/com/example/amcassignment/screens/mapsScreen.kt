@@ -38,7 +38,7 @@ import com.google.maps.android.ktx.awaitMap
 
 
 @Composable
-fun mapScreen(navController: NavController, services: String?, datetime: String?) {
+fun mapScreen(navController: NavController, services: String?, datetime: String?, lat: String, long: String) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -52,7 +52,8 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
                     .clip(RoundedCornerShape(24.dp))
                     .padding(10.dp)
             ) {
-                myMap(){}
+                //myMap(){}
+                GoogleMap2(lat, long)
             }
             Card(
                 modifier = Modifier
@@ -94,63 +95,6 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
     }
 
 }
-
-//New map here
-@Composable
-fun GoogleMap() {
-    val mapView = rememberMapViewWithLifeCycler()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        AndroidView(
-            {mapView}
-        ) { mapView ->
-            CoroutineScope(Dispatchers.Main).launch {
-                //val map = mapView.awaitMap()
-            }
-        }
-    }
-}
-
-@Composable
-fun rememberMapViewWithLifeCycler(): MapView {
-    val context = LocalContext.current
-    val mapView = remember {
-        MapView(context).apply {
-            id = com.google.maps.android.ktx.R.id.map_frame
-        }
-    }
-    val lifeCycleObserver = rememberMapLifeCycleObserver(mapView)
-    val lifeCycle = LocalLifecycleOwner.current.lifecycle
-    DisposableEffect(lifeCycle) {
-        lifeCycle.addObserver(lifeCycleObserver)
-        onDispose {
-            lifeCycle.removeObserver(lifeCycleObserver)
-        }
-    }
-
-    return mapView
-}
-
-@Composable
-fun rememberMapLifeCycleObserver(mapView: MapView): LifecycleEventObserver =
-    remember(mapView) {
-        LifecycleEventObserver { _, event ->
-            when(event) {
-                Lifecycle.Event.ON_CREATE -> mapView.onCreate(Bundle())
-                Lifecycle.Event.ON_START -> mapView.onStart()
-                Lifecycle.Event.ON_RESUME -> mapView.onResume()
-                Lifecycle.Event.ON_PAUSE -> mapView.onPause()
-                Lifecycle.Event.ON_STOP -> mapView.onStop()
-                Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
-                else -> throw IllegalStateException()
-            }
-        }
-    }
-//New map end here
 
 @Composable
 fun myMap(

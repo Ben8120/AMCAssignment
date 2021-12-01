@@ -1,11 +1,15 @@
 package com.example.amcassignment
 
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
@@ -22,6 +26,8 @@ import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
 import com.example.amcassignment.screens_cleaner.jobDescriptionScreen
 import com.example.amcassignment.screens_cleaner.viewReviewScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlin.reflect.typeOf
 
 class MainActivity : ComponentActivity() {
@@ -29,13 +35,21 @@ class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
     private lateinit var viewModel: MainViewModel
 
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var email: String  = ""
+        var email: String = ""
         var name: String = ""
 
         var serviceList = emptyList<Services>()
+
+        //location
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        var coords = fetchLocation()
+        var lat: String = coords[0]
+        var long: String = coords[1]
 
         //initialize retrofit
         val repository = Repository()
@@ -126,7 +140,7 @@ class MainActivity : ComponentActivity() {
 
                     composable("maps/{services}/{datetime}",
                         arguments = listOf(navArgument("datetime") {type = NavType.StringType})
-                    ) { backStackEntry -> mapScreen(navController, backStackEntry.arguments?.getString("services"), backStackEntry.arguments?.getString("datetime"))}
+                    ) { backStackEntry -> mapScreen(navController, backStackEntry.arguments?.getString("services"), backStackEntry.arguments?.getString("datetime"), lat, long)}
 
                     composable("confirmation/{services}/{datetime}/{location}",
                         arguments = listOf(navArgument("location") {type = NavType.StringType})
@@ -153,6 +167,36 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun fetchLocation(): Array<String> {
+        val task  = fusedLocationProviderClient.lastLocation
+
+        var lat: String = ""
+        var long: String = ""
+        var coords = arrayOf("3.0553894", "101.6960041")
+
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat
+                .checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
+        }
+        task.addOnSuccessListener {
+            if (it != null){
+                //Toast.makeText(this, "${it.latitude} ${it.longitude}", Toast.LENGTH_SHORT).show()
+                lat = it.latitude.toString()
+                Log.d("Response", lat.toString())
+                long = it.longitude.toString()
+
+                coords[0] = lat
+                coords[1] = long
+                Log.d("Response", "coords:")
+                Log.d("Response", coords[0])
+                Log.d("Response", coords[1])
+            }
+        }
+        return coords
     }
 }
 
