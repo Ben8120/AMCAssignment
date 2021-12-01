@@ -1,6 +1,7 @@
 package com.example.amcassignment.screens
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -42,6 +43,8 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
+    var textFieldText by remember { mutableStateOf(TextFieldValue("")) }
+
     val scrollPageState = rememberScrollState()
     Box(modifier = Modifier.fillMaxSize()) {
         Column() {
@@ -61,15 +64,14 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
                     .padding(10.dp),
                 elevation = 10.dp
             ) {
-                var text by remember { mutableStateOf(TextFieldValue("")) }
                 OutlinedTextField(
-                    value = text,
+                    value = textFieldText,
                     label = { Text(text = "type your location") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp),
                     onValueChange = {
-                        text = it
+                        textFieldText = it
                     }
                 )
             }
@@ -84,8 +86,14 @@ fun mapScreen(navController: NavController, services: String?, datetime: String?
         ) {
             pagerButtons(pageNo = 3, navController = navController, services, null)
         }
+        val context = LocalContext.current
         Button(onClick = {
-                         navController.navigate("confirmation/${services}/${datetime}/Parkhill Residence")
+            if (textFieldText.text.isNullOrBlank()){
+                Toast.makeText(context, "please enter your location",Toast.LENGTH_SHORT).show()
+            } else {
+                navController.navigate("confirmation/${services}/${datetime}/${textFieldText.text}")
+            }
+
         }, modifier = Modifier
             .width(screenWidth / 2)
             .align(Alignment.BottomEnd)

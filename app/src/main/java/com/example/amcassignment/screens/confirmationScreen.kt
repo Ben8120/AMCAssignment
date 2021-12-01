@@ -49,7 +49,6 @@ fun confirmationScreen(
             ) {
                 Text(text = "${services}", Modifier.background(Color.LightGray))
                 Text(text = "${datetime}")
-                Text(text = "${datetime}")
                 Text(text = "${location}")
 
             }

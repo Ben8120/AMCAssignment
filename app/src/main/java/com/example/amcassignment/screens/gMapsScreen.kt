@@ -50,7 +50,7 @@ fun GoogleMap2(lat: String, long: String) {
                 map.uiSettings.isZoomControlsEnabled = true
                 val pickUp = LatLng(lat.toDouble(), long.toDouble()) //Delhi
                 //val destination = LatLng(12.9716, 77.5946) //Bangalore
-                //map.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 6f))
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(pickUp, 6f))
                 val markerOptions =  MarkerOptions()
                     .title("Delhi")
                     .position(pickUp)
