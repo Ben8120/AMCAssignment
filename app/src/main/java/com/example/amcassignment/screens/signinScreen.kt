@@ -1,6 +1,7 @@
 package com.example.amcassignment.screens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -26,9 +27,13 @@ import com.example.amcassignment.MainViewModelFactory
 import com.example.amcassignment.R
 import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.repository.Repository
+import com.example.amcassignment.viewmodel.ApiInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
-fun signinScreen(navController: NavController, mainViewModel: MainViewModel) {
+fun signinScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
@@ -105,17 +110,34 @@ fun signupScreen(navController: NavController) {
             userFields(label = "Name", data = "")
             userFields(label = "Email", data = "")
             userFields(label = "Password", data = "")
+            val local = LocalContext.current
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
-                onClick = {
-                /*TODO*/
-                    navController.navigate("home") {
-                        popUpTo("home") {
-                            inclusive = true
+                onClick = {//TODO:hard-coded to dynamic data + validate
+                    val userCredentials = UserCredentials(null, "hotdog", "hotdog@gmail.com",  "12345678", false)
+                    val apiInterface = ApiInterface.create().postUser(userCredentials)
+                    apiInterface.enqueue(object : Callback<UserCredentials> {
+                        override fun onResponse(
+                            call: Call<UserCredentials>,
+                            response: Response<UserCredentials>
+                        ) {
+                            //TODO("Validation")
+                            Toast.makeText(local, "Successfully created user", Toast.LENGTH_SHORT).show()
+
+                            navController.navigate("home") {
+                                popUpTo("home") {
+                                    inclusive = true
+                                }
+                            }
                         }
-                    }
+
+                        override fun onFailure(call: Call<UserCredentials>, t: Throwable) {
+                            TODO("Toast to try new email")
+                        }
+
+                    })
                 }) {
                 Text("Sign up")
             }

@@ -162,7 +162,7 @@ class MainActivity : ComponentActivity() {
 
                     composable("rating"){ ratingScreen()}
                     composable("profile"){ profileScreen(navController, name, email)}
-                    composable("signin"){ signinScreen(navController, viewModel)}
+                    composable("signin"){ signinScreen(navController)}
                     composable("signup"){ signupScreen(navController)}
 
                     //Cleaner screens

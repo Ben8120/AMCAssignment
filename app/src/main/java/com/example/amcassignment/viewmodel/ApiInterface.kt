@@ -5,6 +5,7 @@ import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -13,6 +14,20 @@ import retrofit2.http.*
 interface ApiInterface {
     @GET("api/UserCredentials")
     fun getList() : Call<List<UserCredentials>>
+
+    @GET("api/UserCredentials/{userId}")
+    fun getUser(
+        @Path("userId") userId: Int
+    ): Response<UserCredentials>
+
+    @PUT("api/UserCredentials/{userId}")
+    fun putUser(
+        @Path("userId") userId: Int
+    ): Response<UserCredentials>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/UserCredentials")
+    fun postUser(@Body userCredentials: UserCredentials) : Call<UserCredentials>
 
     @GET("api/Services")
     fun getService() : Call<List<Services>>
