@@ -35,6 +35,12 @@ interface SimpleApi {
     @GET("api/UserCredentials")
     suspend fun getUserCredentialsList(): Response<List<UserCredentials>>
 
+    //POST UserCredentials
+    @POST("api/UserCredentials")
+    suspend fun postUserCredentials(
+        @Body userCredential: UserCredentials
+    ): Response<UserCredentials>
+
     //GET all services
     @GET("api/Services")
     suspend fun getServices(): Response<List<Services>>

@@ -1,9 +1,11 @@
 package com.example.amcassignment.repository
 
+import androidx.lifecycle.viewModelScope
 import com.example.amcassignment.model.Post
 import com.example.amcassignment.model.Services
 import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.utils.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Response
 import retrofit2.Retrofit
 
@@ -31,6 +33,10 @@ class Repository {
     //List of User Credentials
     suspend fun getUserCredentialsList(): Response<List<UserCredentials>> {
         return RetrofitInstance.api.getUserCredentialsList()
+    }
+
+    suspend fun postUserCredentials(userCredentials: UserCredentials): Response<UserCredentials> {
+        return RetrofitInstance.api.postUserCredentials(userCredentials)
     }
 
     ///list of Services

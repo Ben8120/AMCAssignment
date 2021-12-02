@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.amcassignment.model.Post
 import com.example.amcassignment.model.Services
+import com.example.amcassignment.model.UserCredentials
 import com.example.amcassignment.repository.Repository
 import com.example.amcassignment.screens.*
 import com.example.amcassignment.screens_cleaner.cleanerHomeScreen
@@ -28,6 +29,7 @@ import com.example.amcassignment.screens_cleaner.viewReviewScreen
 import com.example.amcassignment.ui.theme.AMCAssignmentTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.reflect.typeOf
 
 class MainActivity : ComponentActivity() {
@@ -115,13 +117,25 @@ class MainActivity : ComponentActivity() {
         viewModel.getServicesList()
         viewModel.servicesListResponse.observe(this, Observer { response  ->
             if (response.isSuccessful){
-                Log.d("Response", response.body().toString())
+                //Log.d("Response", response.body().toString())
                 serviceList = response.body()!!
-                Log.d("Response", serviceList.toString())
+                //Log.d("Response", serviceList.toString())
             } else {
                 Log.d("Response", "err")
             }
         })
+
+        //val newUser = UserCredentials(, "Benji", "benji@gmail.com", "12345678", false)
+        /*viewModel.postUserCredentials(newUser)
+        viewModel.userCredentialsPostResponse.observe(this, Observer { response ->
+            if(response.isSuccessful){
+                Log.d("Response", response.body().toString())
+                Log.d("Response", response.code().toString())
+                Log.d("Response", response.message().toString())
+            } else {
+                Log.d("Response", response.errorBody().toString())
+            }
+        })*/
 
         setContent {
             AMCAssignmentTheme {
@@ -148,7 +162,7 @@ class MainActivity : ComponentActivity() {
 
                     composable("rating"){ ratingScreen()}
                     composable("profile"){ profileScreen(navController, name, email)}
-                    composable("signin"){ signinScreen(navController)}
+                    composable("signin"){ signinScreen(navController, viewModel)}
                     composable("signup"){ signupScreen(navController)}
 
                     //Cleaner screens
