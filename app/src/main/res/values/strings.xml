@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">AMCAssignment</string>
-    <string name="google_maps_key">AIzaSyCqOmDnlQEQ26qvJXXQSzDbCW1rbk50Nto</string>
+    <string name="google_maps_key">GOOGLEMAPSKEY</string>
 </resources>
